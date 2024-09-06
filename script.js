@@ -80,11 +80,11 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
     const mpgal1 = 30;
     
     // At 60 miles per hour, you get 28 miles per gallon.
-    const mpg2 = 60;
-    let mpgal2 = 28;
+    const mph2 = 60;
+    const mpgal2 = 28;
 
     // At 75 miles per hour, you get 23 miles per gallon.
-    const mpg3 = 75;
+    const mph3 = 75;
     const mpgal3 = 23;
 
     // You have a fuel budget of $175.
@@ -95,7 +95,20 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
 
     // Set up a program to answer the following questions:
     // How many gallons of fuel will you need for the entire trip?
-    let scenario1 = 
+
+    let scenario1 = distance / mpgal1;
+    let scenario2 = distance / mpgal2;
+    let scenario3 = distance / mpgal3;
+
+    console.log(scenario1, scenario2, scenario3);
+
     // Will your budget be enough to cover the fuel expense?
+    // let cost1 = budget / 
     // How long will the trip take, in hours?
+
+    let time1 = distance / mph1;
+    let time2 = distance / mph2;
+    let time3 = distance / mph3;
+
+    console.log(time1, time2, time3);
 
