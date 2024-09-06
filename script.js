@@ -46,14 +46,17 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
 !(n1 > 25 || n2 > 25 || n3 > 25 || n4 > 25) && 
 (n1 != n2 && n1 != n3 && n1 != n4 && n2 != n3 && n2 != n4 && n3 != n4);
 
-// Part 1: Math Problems 
+
+
+/* --------------------------------- Part 1: Math Problems --------------------------------- */ 
+
     // Check if all numbers are divisible by 5. Cache the result in a variable.
     let isDivFive = (n1 % 5) + (n2 % 5) + (n3 % 5) + (n4 % 5) == 0;
-    console.log('All given numbers are divisible by 5', isDivFive);
+    console.log('All given numbers are divisible by 5:', isDivFive);
 
     // Check if the first number is larger than the last. Cache the result in a variable.
     let isFirstGreaterLast = n1 > n4;
-    console.log('n1 is greater n4', isFirstGreaterLast);
+    console.log('n1 is greater than n4:', isFirstGreaterLast);
 
     // Accomplish the following arithmetic chain:
         // Subtract the first number from the second number.
@@ -63,14 +66,30 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
         // Find the remainder of dividing the result by the fourth number.
         let remainderFinal = multiplyByThird / n4;
 
+        // yields final results
         console.log(remainderFinal);
 
     // Change the way that isOver25 calculates so that we do not need to use the NOT operator (!) in other logic comparisons. Rename the variable as appropriate.
     
     // const isOver25 = n1 > 25 || n2 > 25 || n3 > 25 || n4 > 25; --- from sample code snippet above 
-    // let isOver25Dif = 
+    
+    // negating isOver25 would be n1, n2, n3, n4 being less than or equal to the value of 25
+    // assign the value to "isUnder25" variable
+    const isUnder25 = n1 < 26 || n2 < 26 || n3 < 26 || n4 < 26;
+    // console.log(isUnder25); 
 
-// Part 2: Practical Math
+    // declare a new const variable "isValidStill" to take in the new results of "isValid" w/ the inclusion of "isUnder25" over "!isOver25"
+    // (Note: const variables can NOT be re-declared with new values -- the original value can NOT be overwritten)
+    const isValidStill = isSum50 && isTwoOdd && isUnder25 && isUnique;
+    // check if the logic still holds 
+    console.log(isValidStill);
+
+    // Part 1 Conclusion -- w/ a line break at the end to separate from Part 2
+    console.log(`Part 1 all together: ${isDivFive}, ${isFirstGreaterLast}, ${remainderFinal}, ${isValidStill}\n` );
+        
+
+
+/* --------------------------------- Part 2: Practical Math --------------------------------- */
     // The distance of the trip, in total, is 1,500 miles.
     const distance = 1500;
 
@@ -91,24 +110,59 @@ const dontDoThis = ((n1 + n2 + n3 + n4) == 50) &&
     const budget = 175;
 
     // The average cost of fuel is $3 per gallon.
-    const avgCost = 3;
+    const costGal = 3;
 
     // Set up a program to answer the following questions:
     // How many gallons of fuel will you need for the entire trip?
 
-    let scenario1 = distance / mpgal1;
-    let scenario2 = distance / mpgal2;
-    let scenario3 = distance / mpgal3;
+    // calculate the amount of fuel required for each scenarios
+    let fuel1 = distance / mpgal1;
+    let fuel2 = distance / mpgal2;
+    let fuel3 = distance / mpgal3;
 
-    console.log(scenario1, scenario2, scenario3);
+    // print block for the amount of fuel required for each scenarios
+    console.log(`For a trip of ${distance} miles at a constant rate ...`);
+    console.log(`Scenario #1: ${mph1} miles per hour with ${mpgal1} miles per gallon, it will take ${fuel1} gallons.`);
+    console.log(`Scenario #2: ${mph2} miles per hour with ${mpgal2} miles per gallon, it will take ${fuel2} gallons.`);
+    console.log(`Scenario #3: ${mph3} miles per hour with ${mpgal3} miles per gallon, it will take ${fuel3} gallons.`);
 
     // Will your budget be enough to cover the fuel expense?
-    // let cost1 = budget / 
+
+    // gauge the cost of fuel for each events
+    let cost1 = fuel1 * costGal;
+    let cost2 = fuel2 * costGal;
+    let cost3 = fuel3 * costGal; 
+
+    // print block for total cost in fuel, also formatted the cost to 2 decimal places
+    console.log(`\nWith a fuel budget of ` + budget + ` the cost in each case would be ...`);
+    console.log('Scenario #1: ' + cost1.toFixed(2) + ' USD.');
+    console.log("Scenario #2: " + cost2.toFixed(2) + " USD.");
+    console.log(`Scenario #3: ` + cost3.toFixed(2) + ` USD.`);
+
+    // how much money you got left
+    let remainder1 = budget - cost1;
+    let remainder2 = budget - cost2;
+    let remainder3 = budget - cost3;
+
+    // print block checking which scenarios are a go for the trip
+    console.log(`\nEach scenarios will be viable.`);
+    console.log(`With a remainder of \$${remainder1}, Scenario #1: ${cost1 <= budget}`);
+    console.log(`With a remainder of \$${remainder2}, Scenario #2: ${cost2 <= budget}`);
+    console.log(`With a remainder of $${remainder3}, Scenario #3: ${cost3 <= budget}`);     // Recall: '/$' not needed while using backticks ` `
+
     // How long will the trip take, in hours?
 
+    // evaluate the time it will take under each circumstances 
     let time1 = distance / mph1;
     let time2 = distance / mph2;
     let time3 = distance / mph3;
 
-    console.log(time1, time2, time3);
+    // print block of time results
+    console.log("\nIf there are no fuel budget constraints, the trip will take approximately ...");
+    console.log("Scenario #1:", time1, 'hours \nScenario #2:', time2, `hours \nScenario #3:`, time3 + ' hours');
+
+    // Compare the results when traveling at an average of 55, 60, and 75 miles per hour. Which makes the most sense for the trip?
+    console.log(`Given a fuel budget of ${budget}, Scenario #3 is definitely out of the picture as although it would take the least amount of time 
+        at ${time3} hours there simply wouldn't be enough gas money left at hand (${remainder3}). 
+        On the contrary, Scenario #1 (${time1} hours, $${cost1}) and Scenario #2 (${time2} hours, $${cost2}) are both feasible.`);
 
